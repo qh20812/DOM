@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Styles</title>
+</head>
+<body>
+    <p id="pid">Some text</p>
+    <form onsubmit="return false;">
+        <button type="button">Change text</button>
+    </form>
+    <script>
+        function changeText() {
+            const p = document.getElementById("pid");
+            p.style.color = "blue";
+            p.style.fontSize = "18pt";
+        }
+        document.querySelector("button").addEventListener("click", changeText);
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stylesheet Rules</title>
+    <style>
+        body {
+            background-color: darkblue;
+        }
+        p {
+            font-family: Arial;
+            font-size: 12pt;
+            margin-left: 0.125in;
+        }
+        #lumpy {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <p>Sample paragraph</p>
+    <div id="lumpy">Hidden element</div>
+    <script>
+        function logStyleSheetRules() {
+            const styleSheets = document.styleSheets;
+            console.log('Tổng số stylesheet:', styleSheets.length);
+            for (let i = 0; i < styleSheets.length; i++) {
+                const sheet = styleSheets[i];
+                console.log(`Stylesheet ${i + 1}:`);
+                try {
+                    const rules = sheet.cssRules || sheet.rules;
+                    for (let j = 0; j < rules.length; j++) {
+                        const rule = rules[j];
+                        if (rule.selectorText) {
+                            console.log(`Rule ${j + 1}: ${rule.selectorText}`);
+                        }
+                    }
+                } catch (e) {
+                    console.log('Không thể truy cập cssRules của stylesheet này:', e.message);
+                }
+            }
+        }
+        window.onload = logStyleSheetRules;
+    </script>
+</body>
+</html>

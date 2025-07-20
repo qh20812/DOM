@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Border Styles</title>
+    <style>
+        #box {
+            border: 5px solid green;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <form name="FormName">
+        <button type="button" id="thickBorder">Make border 20px-wide</button>
+        <button type="button" id="thinBorder">Make border 5px-wide</button>
+    </form>
+
+    <script>
+        function setBorderWidth(width) {
+            const box = document.getElementById('box');
+            box.style.borderWidth = `${width}px`;
+        }
+
+        document.getElementById('thickBorder').addEventListener('click', (event) => {
+            event.preventDefault();
+            setBorderWidth(20);
+        });
+
+        document.getElementById('thinBorder').addEventListener('click', (event) => {
+            event.preventDefault();
+            setBorderWidth(5);
+        });
+    </script>
+</body>
+</html>
