@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 7: Displaying Event Object Properties</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 24px;
+            width: 100%;
+        }
+        thead {
+            font-weight: bold;
+        }
+        td, th {
+            border: 1px solid #bbb;
+            padding: 2px 10px;
+        }
+        .odd {
+            background-color: #efdfef;
+        }
+        .even {
+            background-color: #ffffff;
+        }
+        h1 {
+            font-size: 1.4em;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Properties of the DOM <span id="eventType"></span> Event Object</h1>
+    <div id="eventTable"></div>
+    <script>
+        function showEventProperties(event) {
+            document.getElementById('eventType').textContent = event.type;
+            let table = document.createElement('table');
+            let thead = document.createElement('thead');
+            let trHead = document.createElement('tr');
+            ['#', 'Property', 'Value'].forEach(text => {
+                let th = document.createElement('th');
+                th.textContent = text;
+                trHead.appendChild(th);
+            });
+            thead.appendChild(trHead);
+            table.appendChild(thead);
+            let tbody = document.createElement('tbody');
+            let i = 1;
+            for (let p in event) {
+                let tr = document.createElement('tr');
+                tr.className = (i % 2 === 0) ? 'even' : 'odd';
+                let tdIndex = tr.insertCell(-1);
+                tdIndex.textContent = i;
+                let tdProp = tr.insertCell(-1);
+                tdProp.textContent = p;
+                let tdVal = tr.insertCell(-1);
+                try {
+                    let val = event[p];
+                    if (typeof val === 'function') {
+                        tdVal.textContent = '[function]';
+                    } else {
+                        tdVal.textContent = val;
+                    }
+                } catch (e) {
+                    tdVal.textContent = '[unreadable]';
+                }
+                tbody.appendChild(tr);
+                i++;
+            }
+            table.appendChild(tbody);
+            document.getElementById('eventTable').innerHTML = '';
+            document.getElementById('eventTable').appendChild(table);
+        }
+        window.onload = showEventProperties;
+    </script>
+</body>
+</html>
